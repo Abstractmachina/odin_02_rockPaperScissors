@@ -23,6 +23,7 @@ function playGame() {
         }
         let compChoice = getComputerChoice();
 
+        console.log("Player has selected " + convertSelectionToString(playerChoice) + ", Computer has selected " + convertSelectionToString(compChoice));
 
         let winner = computeRound(playerChoice, compChoice);
         if (winner === 0) {
@@ -75,4 +76,11 @@ function computeRound(playerChoice, computerChoice) {
         if (computerChoice === 0) return 1; //comp rock. lose!
         else return 0; //comp paper. win!
     }
+}
+
+function convertSelectionToString(selection) {
+    if (selection === 0) return "Rock";
+    if (selection === 1) return "Paper";
+    if (selection === 2) return "Scissors";
+
 }
