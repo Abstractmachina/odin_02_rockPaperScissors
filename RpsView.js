@@ -13,6 +13,9 @@ class RpsView{
         this.displayAnnouncement.textContent = 'Welcome to Rock Paper Scissors! A game has started! Please choose a hand:';
         this.displayContainer.appendChild(this.displayAnnouncement);
 
+        this.btnContainer = this.createElement('div', 'btnContainer');
+
+
         this.btn_rock = this.createElement('button');
         this.btn_rock.textContent = "Rock";
         this.btn_rock.setAttribute('id', 'btn_r');
@@ -25,8 +28,9 @@ class RpsView{
         this.btn_sci.textContent = "Scissors";
         this.btn_sci.setAttribute('id', 'btn_s');
 
+        this.btnContainer.append(this.btn_rock, this.btn_pap, this.btn_sci);
 
-        this.app.append(this.title, this.displayContainer, this.btn_rock, this.btn_pap, this.btn_sci);
+        this.app.append(this.title, this.displayContainer, this.btnContainer);
     }
 
     createElement(tag, className) {
@@ -44,6 +48,32 @@ class RpsView{
 
     updateDisplay(model) {
 
+        this.displayAnnouncement.textContent = "Player chose " + model.stringifyPlayerChoice() + ", Computer Chose " + model.stringifyComputerChoice();
+
+        let whoScored;
+        if (document.querySelector('.whoScored')) {
+            whoScored = document.querySelector('.whoScored');
+        } else {
+            whoScored = this.createElement('p', 'whoScored');
+            this.displayContainer.appendChild(whoScored);
+        }
+        let scorer;
+        if (model.currentRoundWinner === 0) scorer = "Player";
+        else if (model.currentRoundWinner === 1) scorer = "Computer";
+        else scorer = "No one"
+        whoScored.textContent = scorer + " scored!";
+        
+        let score;
+        if (document.querySelector('.score')) {
+            score = document.querySelector('.score');
+        } else {
+            score = this.createElement('p', 'score');
+            this.displayContainer.appendChild(score);
+        }
+        score.textContent = "Player: " + model.playerScore + " | Computer: " + model.compScore;
+        
+
+
         if (model.finished) {
             this.displayVictory(model);
             return;
@@ -59,31 +89,8 @@ class RpsView{
         }
         round.textContent = "Round " + model.round;
         
-        this.displayAnnouncement.textContent = "Player chose " + model.stringifyPlayerChoice() + ", Computer Chose " + model.stringifyComputerChoice();
         
-        let whoScored;
-        if (document.querySelector('.whoScored')) {
-            whoScored = document.querySelector('.whoScored');
-        } else {
-            whoScored = this.createElement('p', 'whoScored');
-            this.displayContainer.appendChild(whoScored);
-        }
-        let scorer;
-        if (model.currentRoundWinner === 0) scorer = "Player";
-        else if (model.currentRoundWinner === 1) scorer = "Computer";
-        else scorer = "No one"
-        whoScored.textContent = scorer + " scored!";
         
-
-
-        let score;
-        if (document.querySelector('.score')) {
-            score = document.querySelector('.score');
-        } else {
-            score = this.createElement('p', 'score');
-            this.displayContainer.appendChild(score);
-        }
-        score.textContent = "Player: " + model.playerScore + " | Computer: " + model.compScore;
         
 
     }

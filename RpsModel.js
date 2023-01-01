@@ -13,6 +13,7 @@ class RpsModel {
         /* pass player choice in as an integer 0-2. 
     returns 0: player wins, 1: computer wins, 2: tie */
     playRound(playerChoice) {
+        if (this.finished) return;
         if (typeof(playerChoice) !== "number") {return}
         if (playerChoice !== 0 && playerChoice !== 1 && playerChoice !== 2) return;
 
@@ -42,6 +43,17 @@ class RpsModel {
 
     endGame() {
         this.finished = true;
+    }
+
+    reset() {
+        this.playerScore = 0;
+        this.compScore = 0;
+        this.round = 0;
+        this.currentPlayerChoice = 99;
+        this.currentComputerChoice = 99;
+        this.currentRoundWinner = 99;
+
+        this.finished = false;
     }
 
     /**computes a random draw for the computer.
