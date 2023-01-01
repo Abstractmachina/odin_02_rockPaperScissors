@@ -1,6 +1,6 @@
-console.log("hello world");
-playGame();
-
+//playGame();
+const btn_rock = document.querySelector('#btn_rock');
+btn_rock.addEventListener('click', playRound());
 
 function playGame() {
     console.log("Welcome to Rock, Paper Scissors!");
@@ -15,6 +15,7 @@ function playGame() {
         console.log("Current Score:");
         console.log("Player: " + playerScore.toString() + " | Computer: " + compScore.toString());
         console.log("Please select your hand:");
+
         const playerChoice = parseFloat(window.prompt("0 = Rock, 1 = Paper, 2 = Scissors"));
 
         if (playerChoice !== 0 && playerChoice !== 1 && playerChoice !== 2) {
@@ -26,6 +27,7 @@ function playGame() {
         console.log("Player has selected " + convertSelectionToString(playerChoice) + ", Computer has selected " + convertSelectionToString(compChoice));
 
         let winner = computeRound(playerChoice, compChoice);
+        
         if (winner === 0) {
             console.log("Player wins!");
             playerScore+=1;
@@ -48,6 +50,17 @@ function playGame() {
     else console.log("Computer won!")
     
 }
+
+/* pass player choice in as an integer 0-2. 
+returns 0: player wins, 1: computer wins, 2: tie */
+function playRound(playerChoice) {
+    if (typeof(playerChoice) !== "number") {return}
+    if (playerChoice !== 0 && playerChoice !== 1 && playerChoice !== 2) return;
+
+    const compChoice = getComputerChoice();
+    return computeRound(playerChoice, compChoice);
+}
+
 
 
 //0 = rock, 1 = paper, 2 = scissors
