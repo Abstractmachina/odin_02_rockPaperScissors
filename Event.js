@@ -11,5 +11,3 @@ class Event {
       this.listeners.forEach(listener => { listener(params); });
     }
   }
-  
-  export default Event;
