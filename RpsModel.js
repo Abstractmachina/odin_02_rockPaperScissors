@@ -5,6 +5,7 @@ class RpsModel {
         this.round = 0;
         this.currentPlayerChoice = 99;
         this.currentComputerChoice = 99;
+        this.currentRoundWinner = 99;
 
         this.finished = false;
     }
@@ -17,10 +18,10 @@ class RpsModel {
 
         this.currentPlayerChoice = playerChoice;
         this.currentComputerChoice = this.getComputerChoice();
-        const result = this.computeRound(this.currentPlayerChoice, this.currentComputerChoice);
+        this.currentRoundWinner = this.computeRound(this.currentPlayerChoice, this.currentComputerChoice);
 
-        if (result === 0)  this.playerScores();
-        else if (result === 1) this.computerScores();
+        if (this.currentRoundWinner === 0)  this.playerScores();
+        else if (this.currentRoundWinner === 1) this.computerScores();
         else this.tie();
         this.round++;
         if (this.playerScore >= 3 || this.compScore >= 3) this.endGame(); 
