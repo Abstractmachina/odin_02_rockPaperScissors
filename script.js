@@ -1,6 +1,34 @@
-//const app = new RpsController();
 
-const testview = new RpsView();
+const model = new RpsModel();
+const view = new RpsView();
+// const app = new RpsController(model, view);
+
+view.btn_rock.addEventListener('click', event => {
+    model.playRound(0);
+    console.log("player score: "+ model.playerScore);
+    console.log("computer score: " + model.compScore);
+
+    view.displayAnnouncement.textContent = "Round " + model.round +"\nPlayer chose " + model.stringifyPlayerChoice() + ", Computer Chose " + model.stringifyComputerChoice();
+});
+view.btn_pap.addEventListener('click', event => {
+    model.playRound(1);
+    console.log("player score: "+ model.playerScore);
+    console.log("computer score: " + model.compScore);
+
+    view.displayAnnouncement.textContent = "Round " + model.round +"\nPlayer chose " + model.stringifyPlayerChoice() + ", Computer Chose " + model.stringifyComputerChoice();
+});
+view.btn_sci.addEventListener('click', event => {
+    model.playRound(2);
+    console.log("player score: "+ model.playerScore);
+    console.log("computer score: " + model.compScore);
+
+    view.displayAnnouncement.textContent = "Round " + model.round +"\nPlayer chose " + model.stringifyPlayerChoice() + ", Computer Chose " + model.stringifyComputerChoice();
+});
+
+
+
+
+
 
 // //playGame();
 // // const btn_rock = document.querySelector('#btn_rock');
